@@ -2,12 +2,12 @@
   <h2>Log In</h2>
   <div class="row">
     <mat-form-field>
-      <input matInput placeholder="Username" required>
+      <input matInput placeholder="Username" required [(ngModel)]="username" name="username">
     </mat-form-field>
   </div>
   <div class="row">
     <mat-form-field>
-      <input matInput placeholder="Password" required type="password">
+      <input matInput placeholder="Password" required type="password" [(ngModel)]="password" name="password">
     </mat-form-field>
   </div>
   <div class="row">
