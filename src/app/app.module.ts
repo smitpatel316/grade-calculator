@@ -15,7 +15,7 @@ import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './home/home.component';
-
+import { AuthGuard, auth } from './auth.guard';
 @NgModule({
   declarations: [AppComponent, SignInComponent, SignUpComponent, HomeComponent],
   imports: [
@@ -31,7 +31,7 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [AuthGuard, auth],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

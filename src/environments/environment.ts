@@ -11,10 +11,8 @@ export const environment = {
     projectId: 'grade-calculator-d94df',
     storageBucket: 'grade-calculator-d94df.appspot.com',
     messagingSenderId: '792257153685'
-  },
-  loggedIn: false
+  }
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
