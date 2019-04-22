@@ -16,6 +16,9 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard, auth } from './auth.guard';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [AppComponent, SignInComponent, SignUpComponent, HomeComponent],
   imports: [
@@ -29,7 +32,10 @@ import { AuthGuard, auth } from './auth.guard';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatIconModule
   ],
   providers: [AuthGuard, auth],
   bootstrap: [AppComponent]
