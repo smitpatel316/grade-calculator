@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { auth } from '../auth.guard';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,15 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
+
+  constructor(private author: auth, private router: Router) { }
 
   ngOnInit() {
   }
-  addStudyTerm() {
-    this.router.navigate(['add-study-term']);
-  }
-  signOut() {
+  signOut(){
     sessionStorage.clear();
+    this.author.setLoggedIn(false);
     this.router.navigate(['sign-in']);
   }
 }
