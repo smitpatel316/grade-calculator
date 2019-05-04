@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <span>Dashboard</span>
     <span class="example-spacer"></span>
-    <button mat-raised-button color="accent">
+    <button mat-raised-button color="accent" (click)="signOut()">
       <mat-icon>exit_to_app</mat-icon>
     </button>
   </mat-toolbar-row>
@@ -14,7 +14,7 @@
     </button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button mat-stroked-button color="primary" style="height: 100%;width: 100%;">
+    <button mat-stroked-button color="primary" style="height: 100%;width: 100%;" (click)="addStudyTerm()">
       <h2>+ Study Term</h2>
     </button></mat-grid-tile>
   <mat-grid-tile>

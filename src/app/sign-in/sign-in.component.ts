@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { auth } from '../auth.guard';
+import { AngularFirestore } from '@angular/fire/firestore';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -16,7 +17,8 @@ export class SignInComponent implements OnInit {
     private router: Router,
     private afAuth: AngularFireAuth,
     private snackBar: MatSnackBar,
-    private author: auth
+    private author: auth,
+    private afs: AngularFirestore
   ) {}
 
   async ngOnInit() {
@@ -36,8 +38,12 @@ export class SignInComponent implements OnInit {
     await this.afAuth.auth
       .signInWithEmailAndPassword(this.username, this.password)
       .then((resp: any) => {
-        this.showMessage('Log In Successful');
         this.author.setLoggedIn(true);
+        let userUID = this.afAuth.auth.currentUser.uid;
+        this.afs
+          .collection<any>('users')
+          .doc(userUID)
+          .set({});
         sessionStorage.setItem('username', this.username);
         sessionStorage.setItem('password', this.password);
         this.router.navigate(['home']);
@@ -49,7 +55,7 @@ export class SignInComponent implements OnInit {
   }
   showMessage(message: string) {
     this.snackBar.open(message, 'Close', {
-      duration: 10000
+      duration: 5000
     });
   }
 }

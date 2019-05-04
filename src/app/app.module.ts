@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -19,8 +20,17 @@ import { AuthGuard, auth } from './auth.guard';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
+import { AddStudyTermComponent } from './add-study-term/add-study-term.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
 @NgModule({
-  declarations: [AppComponent, SignInComponent, SignUpComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    SignInComponent,
+    SignUpComponent,
+    HomeComponent,
+    AddStudyTermComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,13 +41,16 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     FormsModule,
     MatSnackBarModule,
     MatToolbarModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [AuthGuard, auth],
+  providers: [AuthGuard, auth, MatNativeDateModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

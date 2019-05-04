@@ -1,0 +1,58 @@
+<mat-card>
+  <mat-card-title>
+    New Study Term
+  </mat-card-title>
+  <mat-card-content>
+    <form>
+      <table>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Study Term" name="name" id="name" />
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input
+                matInput
+                [matDatepicker]="picker"
+                placeholder="Start Date"
+                name="startDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker touchUi="true" #picker></mat-datepicker>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input
+                matInput
+                [matDatepicker]="picker2"
+                placeholder="End Date"
+                name="endDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker touchUi="true" #picker2></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="content-center">
+            <button mat-raised-button color="accent" (click)="submit()">
+              Submit
+            </button>
+            <button mat-raised-button color="accent">Clear</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </mat-card-content>
+</mat-card>
