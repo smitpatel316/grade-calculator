@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  constructor(private author: auth, private router: Router) {}
 
-  constructor(private author: auth, private router: Router) { }
-
-  ngOnInit() {
+  ngOnInit() {}
+  addStudyTerm() {
+    this.router.navigate(['add-study-term']);
   }
-  signOut(){
-    sessionStorage.clear();
+  signOut() {
     this.author.setLoggedIn(false);
     this.router.navigate(['sign-in']);
   }

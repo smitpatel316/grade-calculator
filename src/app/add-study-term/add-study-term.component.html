@@ -8,7 +8,13 @@
         <tr>
           <td>
             <mat-form-field>
-              <input matInput placeholder="Study Term" name="name" id="name" />
+              <input
+                matInput
+                placeholder="Study Term"
+                name="name"
+                id="name"
+                [(ngModel)]="name"
+              />
             </mat-form-field>
           </td>
         </tr>
@@ -20,6 +26,7 @@
                 [matDatepicker]="picker"
                 placeholder="Start Date"
                 name="startDate"
+                [(ngModel)]="startDate"
               />
               <mat-datepicker-toggle
                 matSuffix
@@ -35,6 +42,7 @@
                 [matDatepicker]="picker2"
                 placeholder="End Date"
                 name="endDate"
+                [(ngModel)]="endDate"
               />
               <mat-datepicker-toggle
                 matSuffix
@@ -45,11 +53,46 @@
           </td>
         </tr>
         <tr>
+          <div class="mat-h3">
+            Courses
+          </div>
+        </tr>
+        <tr>
+          <td>
+            <button mat-mini-fab (click)="addCourse()">
+              <mat-icon aria-label="Example icon-button with a heart icon"
+                >add</mat-icon
+              >
+            </button>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Name"
+                name="courseName"
+                id="courseName"
+                [(ngModel)]="newCourse"
+              />
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr></tr>
+        <tr>
+          <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let course of courses">{{
+              course
+            }}</mat-list-item>
+          </mat-list>
+        </tr>
+        <tr>
           <td colspan="2" class="content-center">
             <button mat-raised-button color="accent" (click)="submit()">
               Submit
             </button>
-            <button mat-raised-button color="accent">Clear</button>
+            <button mat-raised-button color="accent" (click)="clear()">
+              Clear
+            </button>
           </td>
         </tr>
       </table>

@@ -21,16 +21,7 @@ export class SignInComponent implements OnInit {
     private afs: AngularFirestore
   ) {}
 
-  async ngOnInit() {
-    if (
-      sessionStorage.getItem('username') &&
-      sessionStorage.getItem('password')
-    ) {
-      this.username = sessionStorage.getItem('username');
-      this.password = sessionStorage.getItem('password');
-      await this.signIn();
-    }
-  }
+  async ngOnInit() {}
   signUp() {
     this.router.navigate(['sign-up']);
   }
@@ -40,12 +31,13 @@ export class SignInComponent implements OnInit {
       .then((resp: any) => {
         this.author.setLoggedIn(true);
         let userUID = this.afAuth.auth.currentUser.uid;
-        this.afs
-          .collection<any>('users')
-          .doc(userUID)
-          .set({});
-        sessionStorage.setItem('username', this.username);
-        sessionStorage.setItem('password', this.password);
+        let doc = this.afs.collection<any>('users').doc(userUID);
+        let get_doc = doc.get().subscribe((val: any) => {
+          if (!val.exists) {
+            doc.set({ terms: [] });
+          }
+        });
+
         this.router.navigate(['home']);
       })
       .catch(error => {
