@@ -9,20 +9,41 @@
 </mat-toolbar>
 <mat-grid-list cols="2" rowHeight="2:1">
   <mat-grid-tile>
-    <button mat-stroked-button color="primary" style="height: 100%;width: 100%;">
+    <button
+      mat-stroked-button
+      color="primary"
+      style="height: 100%;width: 100%;"
+    >
       <h2>Summary</h2>
     </button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button mat-stroked-button color="primary" style="height: 100%;width: 100%;" (click)="addStudyTerm()">
+    <button
+      mat-stroked-button
+      color="primary"
+      style="height: 100%;width: 100%;"
+      (click)="addStudyTerm()"
+    >
       <h2>+ Study Term</h2>
-    </button></mat-grid-tile>
+    </button></mat-grid-tile
+  >
   <mat-grid-tile>
-    <button mat-stroked-button color="primary" style="height: 100%;width: 100%;">
+    <button
+      mat-stroked-button
+      color="primary"
+      style="height: 100%;width: 100%;"
+    >
       <h2>Add Grade</h2>
-    </button></mat-grid-tile>
+    </button></mat-grid-tile
+  >
   <mat-grid-tile>
-    <button mat-stroked-button color="primary" style="height: 100%;width: 100%;">
+    <button
+      mat-stroked-button
+      color="primary"
+      style="height: 100%;width: 100%;"
+      (click)="addCourse()"
+    >
       <h2>Add/Update Course</h2>
-    </button></mat-grid-tile>
+    </button></mat-grid-tile
+  >
 </mat-grid-list>

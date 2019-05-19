@@ -18,19 +18,13 @@ export class AddStudyTermComponent implements OnInit {
   async submit() {
     let userUID = this.afAuth.auth.currentUser.uid;
     let document = this.afs.collection<any>('users').doc(userUID);
-    let data = document.valueChanges();
-    await data.subscribe((val: any) => {
-      console.log(val);
-    });
-    document.set(
-      {
-        name: this.name,
-        startDate: this.startDate,
-        endDate: this.endDate,
-        courses: this.courses
-      },
-      { merge: true }
-    );
+    let term = {};
+    term[this.name] = {
+      startDate: this.startDate,
+      endDate: this.endDate,
+      courses: this.courses
+    };
+    document.update(term);
   }
   addCourse() {
     if (this.newCourse !== '' && !this.courses.includes(this.newCourse)) {

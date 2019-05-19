@@ -27,13 +27,15 @@ import { AddStudyTermComponent } from './add-study-term/add-study-term.component
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { MatListModule } from '@angular/material/list';
+import { AddCourseComponent } from './add-course/add-course.component';
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     SignUpComponent,
     HomeComponent,
-    AddStudyTermComponent
+    AddStudyTermComponent,
+    AddCourseComponent
   ],
   imports: [
     BrowserModule,
