@@ -11,8 +11,12 @@ export class HomeComponent implements OnInit {
   constructor(private author: auth, private router: Router) {}
 
   ngOnInit() {}
+
   addStudyTerm() {
     this.router.navigate(['add-study-term']);
+  }
+  addCourse() {
+    this.router.navigate(['update-study-term']);
   }
   signOut() {
     this.author.setLoggedIn(false);

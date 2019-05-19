@@ -4,23 +4,32 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-add-study-term',
-  templateUrl: './add-study-term.component.html',
-  styleUrls: ['./add-study-term.component.css']
+  selector: 'app-update-study-term',
+  templateUrl: './update-study-term.component.html',
+  styleUrls: ['./update-study-term.component.css']
 })
-export class AddStudyTermComponent implements OnInit {
+export class UpdateStudyTermComponent implements OnInit {
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
     private snackBar: MatSnackBar
   ) {}
+  addedTerms: any = null;
+  termNames: string[] = [];
   name = '';
-  startDate: any = null;
-  endDate: any = null;
+  startDate: Date = null;
+  endDate: Date = null;
   newCourse = '';
   courses: string[] = [];
-  ngOnInit() {}
-  async submit() {
+  ngOnInit() {
+    const userUID = this.afAuth.auth.currentUser.uid;
+    const document = this.afs.collection<any>('users').doc(userUID);
+    document.valueChanges().subscribe((terms: any) => {
+      this.addedTerms = terms;
+      this.termNames = Object.keys(terms);
+    });
+  }
+  async update() {
     const userUID = this.afAuth.auth.currentUser.uid;
     const document = this.afs.collection<any>('users').doc(userUID);
     const term = {};
@@ -51,6 +60,13 @@ export class AddStudyTermComponent implements OnInit {
     this.endDate = null;
     this.courses = [];
     this.newCourse = '';
+  }
+  loadTerm() {
+    this.startDate = new Date(
+      this.addedTerms[this.name].startDate.seconds * 1000
+    );
+    this.endDate = new Date(this.addedTerms[this.name].endDate.seconds * 1000);
+    this.courses = this.addedTerms[this.name].courses;
   }
   showMessage(message: string) {
     this.snackBar.open(message, 'Close', {

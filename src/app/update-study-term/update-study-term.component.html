@@ -1,0 +1,120 @@
+<mat-card>
+  <mat-card-title>
+    Update Study Term
+  </mat-card-title>
+  <mat-card-content>
+    <form>
+      <table>
+        <tr>
+          <td>
+            <mat-form-field>
+              <mat-label>Study Term</mat-label>
+              <mat-select [(value)]="name" (selectionChange)="loadTerm()">
+                <mat-option
+                  *ngFor="let termName of termNames"
+                  [(value)]="termName"
+                >
+                  {{ termName }}
+                </mat-option>
+              </mat-select>
+              <!-- <input
+                matInput
+                placeholder="Study Term"
+                name="name"
+                id="name"
+                [(ngModel)]="name"
+              /> -->
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input
+                matInput
+                [matDatepicker]="picker"
+                placeholder="Start Date"
+                name="startDate"
+                [(ngModel)]="startDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker touchUi="true" #picker></mat-datepicker>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input
+                matInput
+                [matDatepicker]="picker2"
+                placeholder="End Date"
+                name="endDate"
+                [(ngModel)]="endDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker touchUi="true" #picker2></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <div class="mat-h3">
+            Courses
+          </div>
+        </tr>
+        <tr>
+          <td>
+            <button mat-mini-fab (click)="addCourse()">
+              <mat-icon aria-label="Example icon-button with a heart icon"
+                >add</mat-icon
+              >
+            </button>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Name"
+                name="courseName"
+                id="courseName"
+                [(ngModel)]="newCourse"
+              />
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr></tr>
+        <tr>
+          <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let course of courses">{{
+              course
+            }}</mat-list-item>
+          </mat-list>
+        </tr>
+        <tr>
+          <td colspan="2" class="content-center">
+            <button
+              mat-raised-button
+              color="accent"
+              style="margin: 5px;"
+              (click)="update()"
+            >
+              Update
+            </button>
+            <button
+              mat-raised-button
+              color="accent"
+              style="margin: 5px;"
+              (click)="clear()"
+            >
+              Clear
+            </button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </mat-card-content>
+</mat-card>
