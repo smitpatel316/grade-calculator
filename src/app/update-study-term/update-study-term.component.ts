@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-update-study-term',
@@ -9,11 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./update-study-term.component.css']
 })
 export class UpdateStudyTermComponent implements OnInit {
-  constructor(
-    private afs: AngularFirestore,
-    private afAuth: AngularFireAuth,
-    private snackBar: MatSnackBar
-  ) {}
+  constructor(private snackBar: MatSnackBar, private api: ApiService) {}
   addedTerms: any = null;
   termNames: string[] = [];
   name = '';
@@ -21,25 +18,21 @@ export class UpdateStudyTermComponent implements OnInit {
   endDate: Date = null;
   newCourse = '';
   courses: string[] = [];
-  ngOnInit() {
-    const userUID = this.afAuth.auth.currentUser.uid;
-    const document = this.afs.collection<any>('users').doc(userUID);
-    document.valueChanges().subscribe((terms: any) => {
-      this.addedTerms = terms;
-      this.termNames = Object.keys(terms);
+  async ngOnInit() {
+    this.api.getTerms().subscribe((data: any) => {
+      this.addedTerms = data;
+      this.termNames = Object.keys(data);
     });
   }
-  async update() {
-    const userUID = this.afAuth.auth.currentUser.uid;
-    const document = this.afs.collection<any>('users').doc(userUID);
+  update() {
     const term = {};
     term[this.name] = {
       startDate: this.startDate,
       endDate: this.endDate,
       courses: this.courses
     };
-    document
-      .update(term)
+    this.api
+      .updateTerm(term)
       .then(result => {
         this.showMessage(this.name + ' term was added!');
         this.clear();

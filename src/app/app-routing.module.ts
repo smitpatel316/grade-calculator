@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth.guard';
 import { AddStudyTermComponent } from './add-study-term/add-study-term.component';
 import { UpdateStudyTermComponent } from './update-study-term/update-study-term.component';
+import { AddGradeComponent } from './add-grade/add-grade.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -20,6 +21,11 @@ const routes: Routes = [
   {
     path: 'update-study-term',
     component: UpdateStudyTermComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'add-grade',
+    component: AddGradeComponent,
     canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '/sign-in' }

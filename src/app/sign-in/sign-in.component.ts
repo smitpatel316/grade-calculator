@@ -34,10 +34,9 @@ export class SignInComponent implements OnInit {
         let doc = this.afs.collection<any>('users').doc(userUID);
         let get_doc = doc.get().subscribe((val: any) => {
           if (!val.exists) {
-            doc.set({ terms: [] });
+            doc.set({});
           }
         });
-
         this.router.navigate(['home']);
       })
       .catch(error => {

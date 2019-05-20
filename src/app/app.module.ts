@@ -29,6 +29,7 @@ import { MatNativeDateModule } from '@angular/material';
 import { MatListModule } from '@angular/material/list';
 import { UpdateStudyTermComponent } from './update-study-term/update-study-term.component';
 import { MatSelectModule } from '@angular/material/select';
+import { AddGradeComponent } from './add-grade/add-grade.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { MatSelectModule } from '@angular/material/select';
     SignUpComponent,
     HomeComponent,
     AddStudyTermComponent,
-    UpdateStudyTermComponent
+    UpdateStudyTermComponent,
+    AddGradeComponent
   ],
   imports: [
     BrowserModule,

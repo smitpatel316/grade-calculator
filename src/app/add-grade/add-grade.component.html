@@ -1,0 +1,130 @@
+<mat-card>
+  <mat-card-title>
+    Add Grade
+  </mat-card-title>
+  <mat-card-content>
+    <form>
+      <table>
+        <tr>
+          <td>
+            <mat-form-field>
+              <mat-label>Study Term</mat-label>
+              <mat-select
+                [(value)]="selectedTerm"
+                (selectionChange)="loadCourses()"
+              >
+                <mat-option
+                  *ngFor="let termName of termNames"
+                  [(value)]="termName"
+                >
+                  {{ termName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td *ngIf="selectedTerm !== ''">
+            <mat-form-field>
+              <mat-label>Course</mat-label>
+              <mat-select [(value)]="selectedCourse">
+                <mat-option *ngFor="let course of courses" [(value)]="course">
+                  {{ course }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr *ngIf="selectedCourse !== ''">
+          <div class="mat-h3">
+            Grades
+          </div>
+        </tr>
+        <tr *ngIf="selectedCourse !== ''">
+          <td>
+            <button mat-mini-fab (click)="addGrade()">
+              <mat-icon aria-label="Example icon-button with a heart icon"
+                >add</mat-icon
+              >
+            </button>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Name"
+                name="assignmentName"
+                id="assignmentName"
+                [(ngModel)]="newGrade.name"
+              />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Grade"
+                name="assignmentGrade"
+                id="assignmentGrade"
+                [(ngModel)]="newGrade.grade"
+              />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Weight"
+                name="weight"
+                id="weight"
+                [(ngModel)]="newGrade.weight"
+              />
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Position Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="grade">
+              <th mat-header-cell *matHeaderCellDef>Grade</th>
+              <td mat-cell *matCellDef="let element">{{ element.grade }}</td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="weight">
+              <th mat-header-cell *matHeaderCellDef>Weight</th>
+              <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </tr>
+        <tr>
+          <td colspan="2" class="content-center">
+            <button
+              mat-raised-button
+              color="accent"
+              style="margin: 5px;"
+              (click)="submit()"
+            >
+              Submit
+            </button>
+            <button
+              mat-raised-button
+              color="accent"
+              style="margin: 5px;"
+              (click)="clear()"
+            >
+              Clear
+            </button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </mat-card-content>
+</mat-card>

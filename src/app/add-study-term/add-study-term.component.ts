@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-add-study-term',
@@ -10,9 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AddStudyTermComponent implements OnInit {
   constructor(
-    private afs: AngularFirestore,
-    private afAuth: AngularFireAuth,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private api: ApiService
   ) {}
   name = '';
   startDate: any = null;
@@ -20,17 +20,15 @@ export class AddStudyTermComponent implements OnInit {
   newCourse = '';
   courses: string[] = [];
   ngOnInit() {}
-  async submit() {
-    const userUID = this.afAuth.auth.currentUser.uid;
-    const document = this.afs.collection<any>('users').doc(userUID);
+  submit() {
     const term = {};
     term[this.name] = {
       startDate: this.startDate,
       endDate: this.endDate,
       courses: this.courses
     };
-    document
-      .update(term)
+    this.api
+      .updateTerm(term)
       .then(result => {
         this.showMessage(this.name + ' term was added!');
         this.clear();

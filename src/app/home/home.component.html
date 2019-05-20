@@ -22,7 +22,7 @@
       mat-stroked-button
       color="primary"
       style="height: 100%;width: 100%;"
-      (click)="addStudyTerm()"
+      [routerLink]="['/add-study-term']"
     >
       <h2>+ Study Term</h2>
     </button></mat-grid-tile
@@ -32,6 +32,7 @@
       mat-stroked-button
       color="primary"
       style="height: 100%;width: 100%;"
+      [routerLink]="['/add-grade']"
     >
       <h2>Add Grade</h2>
     </button></mat-grid-tile
@@ -41,7 +42,7 @@
       mat-stroked-button
       color="primary"
       style="height: 100%;width: 100%;"
-      (click)="addCourse()"
+      [routerLink]="['/update-study-term']"
     >
       <h2>Update Study Term</h2>
     </button></mat-grid-tile
