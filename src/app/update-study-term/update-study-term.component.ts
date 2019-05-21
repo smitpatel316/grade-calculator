@@ -53,7 +53,7 @@ export class UpdateStudyTermComponent implements OnInit {
     this.name = '';
     this.startDate = null;
     this.endDate = null;
-    this.courses = [];
+    this.courses = {};
     this.newCourse = '';
     this.courseNames = [];
   }
@@ -69,5 +69,12 @@ export class UpdateStudyTermComponent implements OnInit {
     this.snackBar.open(message, 'Close', {
       duration: 5000
     });
+  }
+  deleteCourse(course: string) {
+    const index = this.courseNames.indexOf(course, 0);
+    if (index > -1) {
+      this.courseNames.splice(index, 1);
+    }
+    delete this.courses[course];
   }
 }

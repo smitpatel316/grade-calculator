@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,10 +18,11 @@ export class SignInComponent implements OnInit {
     private afAuth: AngularFireAuth,
     private snackBar: MatSnackBar,
     private author: auth,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private ngZone: NgZone
   ) {}
 
-  async ngOnInit() {}
+  ngOnInit() {}
   signUp() {
     this.router.navigate(['sign-up']);
   }
