@@ -17,7 +17,8 @@ export class UpdateStudyTermComponent implements OnInit {
   startDate: Date = null;
   endDate: Date = null;
   newCourse = '';
-  courses: string[] = [];
+  courses: any = null;
+  courseNames: string[] = [];
   async ngOnInit() {
     this.api.getTerms().subscribe((data: any) => {
       this.addedTerms = data;
@@ -42,8 +43,9 @@ export class UpdateStudyTermComponent implements OnInit {
       });
   }
   addCourse() {
-    if (this.newCourse !== '' && !this.courses.includes(this.newCourse)) {
-      this.courses.push(this.newCourse);
+    if (this.newCourse !== '' && !this.courseNames.includes(this.newCourse)) {
+      this.courses[this.newCourse] = [];
+      this.courseNames.push(this.newCourse);
     }
     this.newCourse = '';
   }
@@ -53,6 +55,7 @@ export class UpdateStudyTermComponent implements OnInit {
     this.endDate = null;
     this.courses = [];
     this.newCourse = '';
+    this.courseNames = [];
   }
   loadTerm() {
     this.startDate = new Date(
@@ -60,6 +63,7 @@ export class UpdateStudyTermComponent implements OnInit {
     );
     this.endDate = new Date(this.addedTerms[this.name].endDate.seconds * 1000);
     this.courses = this.addedTerms[this.name].courses;
+    this.courseNames = Object.keys(this.courses);
   }
   showMessage(message: string) {
     this.snackBar.open(message, 'Close', {

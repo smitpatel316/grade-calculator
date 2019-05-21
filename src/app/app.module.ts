@@ -30,6 +30,7 @@ import { MatListModule } from '@angular/material/list';
 import { UpdateStudyTermComponent } from './update-study-term/update-study-term.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AddGradeComponent } from './add-grade/add-grade.component';
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,8 @@ import { AddGradeComponent } from './add-grade/add-grade.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
   ],
   providers: [
     AuthGuard,

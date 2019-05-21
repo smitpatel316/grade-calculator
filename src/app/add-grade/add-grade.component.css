@@ -43,3 +43,7 @@ mat-toolbar-row {
 .content-center {
   text-align: -webkit-center;
 }
+
+th {
+  width: calc(100% / 3);
+}

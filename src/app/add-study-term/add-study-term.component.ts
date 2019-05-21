@@ -10,15 +10,13 @@ import { ApiService } from '../api.service';
   styleUrls: ['./add-study-term.component.css']
 })
 export class AddStudyTermComponent implements OnInit {
-  constructor(
-    private snackBar: MatSnackBar,
-    private api: ApiService
-  ) {}
+  constructor(private snackBar: MatSnackBar, private api: ApiService) {}
   name = '';
   startDate: any = null;
   endDate: any = null;
   newCourse = '';
-  courses: string[] = [];
+  courses: any = {};
+  courseNames: string[] = [];
   ngOnInit() {}
   submit() {
     const term = {};
@@ -38,8 +36,9 @@ export class AddStudyTermComponent implements OnInit {
       });
   }
   addCourse() {
-    if (this.newCourse !== '' && !this.courses.includes(this.newCourse)) {
-      this.courses.push(this.newCourse);
+    if (this.newCourse !== '' && !this.courseNames.includes(this.newCourse)) {
+      this.courses[this.newCourse] = [];
+      this.courseNames.push(this.newCourse);
     }
     this.newCourse = '';
   }
@@ -49,6 +48,7 @@ export class AddStudyTermComponent implements OnInit {
     this.endDate = null;
     this.courses = [];
     this.newCourse = '';
+    this.courseNames = [];
   }
   showMessage(message: string) {
     this.snackBar.open(message, 'Close', {

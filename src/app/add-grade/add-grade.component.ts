@@ -17,11 +17,15 @@ export class AddGradeComponent implements OnInit {
   courses: string[] = [];
   terms: any = null;
   selectedTerm = '';
-  newGrade = {
+  selectedCourse = '';
+  newGrade: Grade = {
     name: '',
     grade: 0,
     weight: 0
   };
+  allGrades: Grade[] = [];
+  data: Grade[] = [];
+  displayedColumns: string[] = ['name', 'grade', 'weight'];
   ngOnInit() {
     this.api.getTerms().subscribe((data: any) => {
       this.terms = data;
@@ -29,10 +33,26 @@ export class AddGradeComponent implements OnInit {
     });
   }
   loadCourses() {
-    this.courses = this.terms[this.selectedTerm].courses;
+    this.courses = Object.keys(this.terms[this.selectedTerm].courses);
     console.log(this.courses);
   }
+  loadGrades() {
+    this.data = this.terms[this.selectedTerm].courses[this.selectedCourse];
+    this.allGrades = this.data;
+  }
   addGrade() {
-    console.log(this.newGrade);
+    this.data.push(this.newGrade);
+    this.allGrades = [...this.data];
+  }
+  clear() {
+    this.selectedCourse = '';
+    this.selectedTerm = '';
+    this.newGrade = null;
+  }
+  submit() {
+    this.terms[this.selectedTerm].courses[this.selectedCourse] = this.allGrades;
+    console.log(this.terms);
+    this.api.updateTerm(this.terms);
+    this.clear();
   }
 }
