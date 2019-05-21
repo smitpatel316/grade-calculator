@@ -25,7 +25,7 @@ export class AddGradeComponent implements OnInit {
   };
   allGrades: Grade[] = [];
   data: Grade[] = [];
-  displayedColumns: string[] = ['name', 'grade', 'weight'];
+  displayedColumns: string[] = ['delete', 'name', 'grade', 'weight'];
   ngOnInit() {
     this.api.getTerms().subscribe((data: any) => {
       this.terms = data;
@@ -34,7 +34,6 @@ export class AddGradeComponent implements OnInit {
   }
   loadCourses() {
     this.courses = Object.keys(this.terms[this.selectedTerm].courses);
-    console.log(this.courses);
   }
   loadGrades() {
     this.data = this.terms[this.selectedTerm].courses[this.selectedCourse];
@@ -43,16 +42,31 @@ export class AddGradeComponent implements OnInit {
   addGrade() {
     this.data.push(this.newGrade);
     this.allGrades = [...this.data];
+    this.newGrade = {
+      name: '',
+      grade: 0,
+      weight: 0
+    };
   }
   clear() {
     this.selectedCourse = '';
     this.selectedTerm = '';
-    this.newGrade = null;
+    this.newGrade = {
+      name: '',
+      grade: 0,
+      weight: 0
+    };
   }
   submit() {
     this.terms[this.selectedTerm].courses[this.selectedCourse] = this.allGrades;
-    console.log(this.terms);
     this.api.updateTerm(this.terms);
     this.clear();
+  }
+  deleteGrade(element) {
+    const index = this.data.indexOf(element, 0);
+    if (index > -1) {
+      this.data.splice(index, 1);
+    }
+    this.allGrades = [...this.data];
   }
 }

@@ -81,10 +81,12 @@
         <tr>
           <mat-list role="list">
             <mat-list-item role="listitem" *ngFor="let course of courseNames">
-              <button mat-mini-fab (click)="deleteCourse(course)">
-                <mat-icon aria-label="Example icon-button with a heart icon"
-                  >delete</mat-icon
-                >
+              <button
+                mat-mini-fab
+                color="primary"
+                (click)="deleteCourse(course)"
+              >
+                <mat-icon>delete</mat-icon>
               </button>
               &nbsp;{{ course }}</mat-list-item
             >
