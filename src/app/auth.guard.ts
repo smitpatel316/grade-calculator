@@ -5,26 +5,26 @@ import {
   UrlTree
 } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 export class auth {
-  loggedIn = false;
+  loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  get isLoggedIn() {
+    return this.loggedIn.asObservable();
+  }
   constructor() {}
   setLoggedIn(val: boolean) {
-    this.loggedIn = val;
+    this.loggedIn.next(val);
   }
 }
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private author: auth) {}
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
+  canActivate():
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.author.loggedIn;
+    return this.author.isLoggedIn;
   }
 }

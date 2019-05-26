@@ -31,6 +31,9 @@ import { UpdateStudyTermComponent } from './update-study-term/update-study-term.
 import { MatSelectModule } from '@angular/material/select';
 import { AddGradeComponent } from './add-grade/add-grade.component';
 import { MatTableModule } from '@angular/material/table';
+import { AnalysisComponent } from './analysis/analysis.component';
+import { WeightedGradeComponent } from './analysis/weighted-grade/weighted-grade.component';
+import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +42,10 @@ import { MatTableModule } from '@angular/material/table';
     HomeComponent,
     AddStudyTermComponent,
     UpdateStudyTermComponent,
-    AddGradeComponent
+    AddGradeComponent,
+    AnalysisComponent,
+    WeightedGradeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

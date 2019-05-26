@@ -1,0 +1,13 @@
+<mat-toolbar *ngIf="isLoggedIn$ | async">
+  <mat-toolbar-row>
+    <span>Dashboard</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="primary" (click)="home()">
+      <mat-icon>home</mat-icon>
+    </button>
+    &nbsp;
+    <button mat-raised-button color="warn" (click)="signOut()">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

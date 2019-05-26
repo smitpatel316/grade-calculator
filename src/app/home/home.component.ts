@@ -9,17 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(
-    private author: auth,
-    private router: Router,
-    private afAuth: AngularFireAuth
-  ) {}
+  constructor() {}
 
   ngOnInit() {}
-  signOut() {
-    this.afAuth.auth.signOut();
-    this.author.setLoggedIn(false);
-    localStorage.clear();
-    this.router.navigate(['sign-in']);
-  }
 }
