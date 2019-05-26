@@ -34,6 +34,7 @@ import { MatTableModule } from '@angular/material/table';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { WeightedGradeComponent } from './analysis/weighted-grade/weighted-grade.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PredictionComponent } from './analysis/prediction/prediction.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AddGradeComponent,
     AnalysisComponent,
     WeightedGradeComponent,
-    NavbarComponent
+    NavbarComponent,
+    PredictionComponent
   ],
   imports: [
     BrowserModule,

@@ -6,11 +6,11 @@ export interface Grade {
   weight: number;
 }
 @Component({
-  selector: 'app-weighted-grade',
-  templateUrl: './weighted-grade.component.html',
-  styleUrls: ['./weighted-grade.component.css']
+  selector: 'app-prediction',
+  templateUrl: './prediction.component.html',
+  styleUrls: ['./prediction.component.css']
 })
-export class WeightedGradeComponent implements OnInit {
+export class PredictionComponent implements OnInit {
   constructor(private api: ApiService) {}
   allGrades: Grade[] = [];
   data: Grade[] = [];
@@ -20,7 +20,8 @@ export class WeightedGradeComponent implements OnInit {
   terms: any = null;
   selectedTerm = '';
   selectedCourse = '';
-  weightedGrade: number = null;
+  gradeNeeded: number = null;
+  gradeWanted: number = null;
   ngOnInit() {
     this.api.getTerms().subscribe((data: any) => {
       this.terms = data;
@@ -35,17 +36,19 @@ export class WeightedGradeComponent implements OnInit {
     this.allGrades = this.data;
   }
   calculate() {
-    let numer = 0;
-    let denom = 0;
-    this.allGrades.forEach(element => {
-      numer += Number(element.grade) * (Number(element.weight) / 100);
-      denom += Number(element.weight) / 100;
-    });
-    this.weightedGrade = Math.round((numer / denom) * 100) / 100;
+    if (this.gradeWanted !== null) {
+      let currentGrades = this.gradeWanted;
+      let weights = 1;
+      this.allGrades.forEach(element => {
+        currentGrades -= Number(element.grade) * (Number(element.weight) / 100);
+        weights -= Number(element.weight) / 100;
+      });
+      this.gradeNeeded = Math.round((currentGrades / weights) * 100) / 100;
+    }
   }
   clear() {
     this.selectedCourse = '';
     this.selectedTerm = '';
-    this.weightedGrade = null;
+    this.gradeNeeded = null;
   }
 }

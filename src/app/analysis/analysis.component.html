@@ -9,4 +9,14 @@
       <h2>Weighted Grade</h2>
     </button>
   </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <button
+      mat-stroked-button
+      color="primary"
+      style="height: 100%;width: 100%;"
+      [routerLink]="['/analysis/prediction']"
+    >
+      <h2>Future Prediction</h2>
+    </button>
+  </mat-grid-tile>
 </mat-grid-list>
