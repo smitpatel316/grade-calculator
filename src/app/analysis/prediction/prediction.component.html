@@ -88,9 +88,12 @@
         </tr>
         <tr *ngIf="gradeNeeded !== null">
           <td>
-            <h2>
-              {{ gradeNeeded }}
-            </h2>
+            <h2>Need {{ gradeNeeded }}%</h2>
+          </td>
+        </tr>
+        <tr *ngIf="gradeNeeded !== null">
+          <td>
+            <h2>In Remaining {{ weightLeft }}%</h2>
           </td>
         </tr>
         <tr>

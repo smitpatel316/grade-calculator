@@ -29,10 +29,13 @@ export class WeightedGradeComponent implements OnInit {
   }
   loadCourses() {
     this.courses = Object.keys(this.terms[this.selectedTerm].courses);
+    this.selectedCourse = '';
+    this.weightedGrade = null;
   }
   loadGrades() {
     this.data = this.terms[this.selectedTerm].courses[this.selectedCourse];
     this.allGrades = this.data;
+    this.weightedGrade = null;
   }
   calculate() {
     let numer = 0;

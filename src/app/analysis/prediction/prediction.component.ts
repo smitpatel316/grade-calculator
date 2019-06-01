@@ -22,6 +22,7 @@ export class PredictionComponent implements OnInit {
   selectedCourse = '';
   gradeNeeded: number = null;
   gradeWanted: number = null;
+  weightLeft = 100;
   ngOnInit() {
     this.api.getTerms().subscribe((data: any) => {
       this.terms = data;
@@ -30,18 +31,23 @@ export class PredictionComponent implements OnInit {
   }
   loadCourses() {
     this.courses = Object.keys(this.terms[this.selectedTerm].courses);
+    this.selectedCourse = '';
+    this.gradeNeeded = null;
   }
   loadGrades() {
     this.data = this.terms[this.selectedTerm].courses[this.selectedCourse];
     this.allGrades = this.data;
+    this.gradeNeeded = null;
   }
   calculate() {
     if (this.gradeWanted !== null) {
       let currentGrades = this.gradeWanted;
       let weights = 1;
+      this.weightLeft = 100;
       this.allGrades.forEach(element => {
         currentGrades -= Number(element.grade) * (Number(element.weight) / 100);
         weights -= Number(element.weight) / 100;
+        this.weightLeft -= Number(element.weight);
       });
       this.gradeNeeded = Math.round((currentGrades / weights) * 100) / 100;
     }
