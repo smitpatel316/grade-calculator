@@ -10,11 +10,25 @@
             <mat-form-field>
               <input
                 matInput
+                required
                 placeholder="Study Term"
                 name="name"
                 id="name"
                 [(ngModel)]="name"
               />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>University</mat-label>
+              <mat-select [(value)]="selectedUniversity">
+                <mat-option
+                  *ngFor="let university of universities"
+                  [(value)]="university"
+                >
+                  {{ university }}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </td>
         </tr>

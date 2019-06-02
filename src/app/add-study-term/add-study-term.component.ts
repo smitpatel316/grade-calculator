@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from '../api.service';
+import { UtilsService } from '../utils.service';
 
 @Component({
   selector: 'app-add-study-term',
@@ -10,13 +11,19 @@ import { ApiService } from '../api.service';
   styleUrls: ['./add-study-term.component.css']
 })
 export class AddStudyTermComponent implements OnInit {
-  constructor(private snackBar: MatSnackBar, private api: ApiService) {}
+  constructor(
+    private snackBar: MatSnackBar,
+    private api: ApiService,
+    private utils: UtilsService
+  ) {}
   name = '';
   startDate: any = null;
   endDate: any = null;
   newCourse = '';
   courses: any = {};
   courseNames: string[] = [];
+  universities: string[] = this.utils.listOfUniversities;
+  selectedUniversity = '';
   ngOnInit() {}
   submit() {
     const term = {};
