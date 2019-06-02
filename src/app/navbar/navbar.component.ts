@@ -18,7 +18,6 @@ export class NavbarComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   ngOnInit() {
     this.isLoggedIn$ = this.author.isLoggedIn;
-    console.log(this.isLoggedIn$);
   }
   signOut() {
     this.afAuth.auth.signOut();
