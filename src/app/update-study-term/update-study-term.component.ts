@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from '../api.service';
+import { UtilsService } from '../utils.service';
 
 @Component({
   selector: 'app-update-study-term',
@@ -10,7 +11,11 @@ import { ApiService } from '../api.service';
   styleUrls: ['./update-study-term.component.css']
 })
 export class UpdateStudyTermComponent implements OnInit {
-  constructor(private snackBar: MatSnackBar, private api: ApiService) {}
+  constructor(
+    private snackBar: MatSnackBar,
+    private api: ApiService,
+    private utils: UtilsService
+  ) {}
   addedTerms: any = null;
   termNames: string[] = [];
   name = '';
@@ -19,6 +24,8 @@ export class UpdateStudyTermComponent implements OnInit {
   newCourse = '';
   courses: any = null;
   courseNames: string[] = [];
+  universities: string[] = this.utils.listOfUniversities;
+  selectedUniversity = '';
   async ngOnInit() {
     this.api.getTerms().subscribe((data: any) => {
       this.addedTerms = data;
@@ -30,7 +37,8 @@ export class UpdateStudyTermComponent implements OnInit {
     term[this.name] = {
       startDate: this.startDate,
       endDate: this.endDate,
-      courses: this.courses
+      courses: this.courses,
+      university: this.selectedUniversity
     };
     this.api
       .updateTerm(term)
@@ -56,6 +64,7 @@ export class UpdateStudyTermComponent implements OnInit {
     this.courses = {};
     this.newCourse = '';
     this.courseNames = [];
+    this.selectedUniversity = '';
   }
   loadTerm() {
     this.startDate = new Date(
@@ -64,6 +73,7 @@ export class UpdateStudyTermComponent implements OnInit {
     this.endDate = new Date(this.addedTerms[this.name].endDate.seconds * 1000);
     this.courses = this.addedTerms[this.name].courses;
     this.courseNames = Object.keys(this.courses);
+    this.selectedUniversity = this.addedTerms[this.name].university;
   }
   showMessage(message: string) {
     this.snackBar.open(message, 'Close', {

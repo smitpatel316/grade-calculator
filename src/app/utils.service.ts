@@ -18,7 +18,7 @@ export class UtilsService {
       'York University'
     ];
   }
-  convertGradeToGpa(university: string, grade: number) {
+  convertGradeToGpa(university, grade) {
     switch (university) {
       case 'University of Toronto':
         return this.UniversityOfToronto(grade);

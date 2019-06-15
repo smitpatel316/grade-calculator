@@ -88,12 +88,24 @@
         </tr>
         <tr *ngIf="gradeNeeded !== null">
           <td>
-            <h2>Need {{ gradeNeeded }}%</h2>
+            <mat-card style="float:left;">
+              <mat-card-header>
+                <mat-card-title>Need</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <h2>{{ gradeNeeded }}</h2>
+              </mat-card-content>
+            </mat-card>
           </td>
-        </tr>
-        <tr *ngIf="gradeNeeded !== null">
           <td>
-            <h2>In Remaining {{ weightLeft }}%</h2>
+            <mat-card style="float:left;">
+              <mat-card-header>
+                <mat-card-title>In</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <h2>{{ weightLeft }}</h2>
+              </mat-card-content>
+            </mat-card>
           </td>
         </tr>
         <tr>

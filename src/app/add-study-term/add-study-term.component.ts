@@ -30,7 +30,8 @@ export class AddStudyTermComponent implements OnInit {
     term[this.name] = {
       startDate: this.startDate,
       endDate: this.endDate,
-      courses: this.courses
+      courses: this.courses,
+      university: this.selectedUniversity
     };
     this.api
       .updateTerm(term)
@@ -56,6 +57,7 @@ export class AddStudyTermComponent implements OnInit {
     this.courses = {};
     this.newCourse = '';
     this.courseNames = [];
+    this.selectedUniversity = '';
   }
   showMessage(message: string) {
     this.snackBar.open(message, 'Close', {
