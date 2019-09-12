@@ -35,6 +35,7 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import { WeightedGradeComponent } from './analysis/weighted-grade/weighted-grade.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PredictionComponent } from './analysis/prediction/prediction.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { PredictionComponent } from './analysis/prediction/prediction.component'
     AnalysisComponent,
     WeightedGradeComponent,
     NavbarComponent,
-    PredictionComponent
+    PredictionComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

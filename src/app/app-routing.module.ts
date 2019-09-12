@@ -10,6 +10,7 @@ import { AddGradeComponent } from './add-grade/add-grade.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { WeightedGradeComponent } from './analysis/weighted-grade/weighted-grade.component';
 import { PredictionComponent } from './analysis/prediction/prediction.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -45,6 +46,10 @@ const routes: Routes = [
     path: 'analysis/prediction',
     component: PredictionComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'test',
+    component: DashboardComponent
   },
   { path: '**', redirectTo: '/sign-in' }
 ];
