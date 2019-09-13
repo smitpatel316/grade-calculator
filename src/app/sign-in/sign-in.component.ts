@@ -1,9 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { auth } from '../auth.guard';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { ApiService } from '../api.service';
 @Component({
   selector: 'app-sign-in',

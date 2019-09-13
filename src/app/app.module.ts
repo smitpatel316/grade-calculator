@@ -18,7 +18,6 @@ import {
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { HomeComponent } from './home/home.component';
 import { AuthGuard, auth } from './auth.guard';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -36,12 +35,12 @@ import { WeightedGradeComponent } from './analysis/weighted-grade/weighted-grade
 import { NavbarComponent } from './navbar/navbar.component';
 import { PredictionComponent } from './analysis/prediction/prediction.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    HomeComponent,
     AddStudyTermComponent,
     UpdateStudyTermComponent,
     AddGradeComponent,
@@ -71,7 +70,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatNativeDateModule,
     MatListModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [
     AuthGuard,
