@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from '../api.service';
 import { UtilsService } from '../utils.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-update-study-term',
@@ -12,6 +11,8 @@ import { UtilsService } from '../utils.service';
 })
 export class UpdateStudyTermComponent implements OnInit {
   constructor(
+    public dialogRef: MatDialogRef<UpdateStudyTermComponent>,
+    @Inject(MAT_DIALOG_DATA) public passedOnInformation,
     private snackBar: MatSnackBar,
     private api: ApiService,
     private utils: UtilsService
@@ -30,6 +31,8 @@ export class UpdateStudyTermComponent implements OnInit {
     this.api.getTerms().subscribe((data: any) => {
       this.addedTerms = data;
       this.termNames = Object.keys(data);
+      this.name = this.passedOnInformation.term;
+      this.loadTerm();
     });
   }
   update() {
@@ -49,6 +52,7 @@ export class UpdateStudyTermComponent implements OnInit {
       .catch(error => {
         this.showMessage(error.message);
       });
+    this.dialogRef.close();
   }
   addCourse() {
     if (this.newCourse !== '' && !this.courseNames.includes(this.newCourse)) {
