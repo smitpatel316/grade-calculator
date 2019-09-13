@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddGradeComponent } from '../add-grade/add-grade.component';
+import { ApiService } from '../api.service';
 import { UpdateStudyTermComponent } from '../update-study-term/update-study-term.component';
 
 @Component({

@@ -1,11 +1,6 @@
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree
-} from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { CanActivate, UrlTree } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export class auth {
   loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { auth } from '../auth.guard';
-import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { auth } from '../auth.guard';
 
 @Component({
   selector: 'app-navbar',
