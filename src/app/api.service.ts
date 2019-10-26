@@ -43,6 +43,14 @@ export class ApiService {
         this.author.setLoggedIn(false);
       });
   }
+  deleteTerm(term: any) {
+    this.getTerms().subscribe((terms: any) => {
+      if (Object.keys(terms).includes(term)) {
+        delete terms[term];
+        this.document.set(terms);
+      }
+    });
+  }
   showMessage(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 5000

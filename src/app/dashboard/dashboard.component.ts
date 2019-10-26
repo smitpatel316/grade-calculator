@@ -56,4 +56,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  deleteTerm(termName: string) {
+    this.api.deleteTerm(termName);
+  }
 }
