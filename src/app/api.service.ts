@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { auth } from './auth.guard';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +42,14 @@ export class ApiService {
         this.showMessage(error.message);
         this.author.setLoggedIn(false);
       });
+  }
+  deleteTerm(term: any) {
+    this.getTerms().subscribe((terms: any) => {
+      if (Object.keys(terms).includes(term)) {
+        delete terms[term];
+        this.document.set(terms);
+      }
+    });
   }
   showMessage(message: string) {
     this.snackBar.open(message, 'Close', {

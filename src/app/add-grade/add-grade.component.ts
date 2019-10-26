@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ApiService } from '../api.service';
 
 export interface Grade {
   name: string;
@@ -13,7 +14,12 @@ export interface Grade {
   styleUrls: ['./add-grade.component.css']
 })
 export class AddGradeComponent implements OnInit {
-  constructor(private api: ApiService, private snackBar: MatSnackBar) {}
+  constructor(
+    public dialogRef: MatDialogRef<AddGradeComponent>,
+    @Inject(MAT_DIALOG_DATA) public passedOnInformation,
+    private api: ApiService,
+    private snackBar: MatSnackBar
+  ) {}
   termNames: string[] = [];
   courses: string[] = [];
   terms: any = null;
@@ -31,6 +37,10 @@ export class AddGradeComponent implements OnInit {
     this.api.getTerms().subscribe((data: any) => {
       this.terms = data;
       this.termNames = Object.keys(data);
+      this.selectedTerm = this.passedOnInformation.term;
+      this.loadCourses();
+      this.selectedCourse = this.passedOnInformation.course;
+      this.loadGrades();
     });
   }
   loadCourses() {
@@ -80,6 +90,7 @@ export class AddGradeComponent implements OnInit {
     this.terms[this.selectedTerm].courses[this.selectedCourse] = this.allGrades;
     this.api.updateTerm(this.terms);
     this.clear();
+    this.dialogRef.close();
   }
   deleteGrade(element) {
     const index = this.data.indexOf(element, 0);

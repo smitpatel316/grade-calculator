@@ -1,53 +1,51 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SignUpComponent } from './sign-up/sign-up.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import {
-  AngularFirestoreModule,
-  FirestoreSettingsToken
-} from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { HomeComponent } from './home/home.component';
-import { AuthGuard, auth } from './auth.guard';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatNativeDateModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
-import { AddStudyTermComponent } from './add-study-term/add-study-term.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { UpdateStudyTermComponent } from './update-study-term/update-study-term.component';
 import { MatSelectModule } from '@angular/material/select';
-import { AddGradeComponent } from './add-grade/add-grade.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../environments/environment';
+import { AddGradeComponent } from './add-grade/add-grade.component';
+import { AddStudyTermComponent } from './add-study-term/add-study-term.component';
 import { AnalysisComponent } from './analysis/analysis.component';
-import { WeightedGradeComponent } from './analysis/weighted-grade/weighted-grade.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { PredictionComponent } from './analysis/prediction/prediction.component';
+import { WeightedGradeComponent } from './analysis/weighted-grade/weighted-grade.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { auth, AuthGuard } from './auth.guard';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { UpdateStudyTermComponent } from './update-study-term/update-study-term.component';
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    HomeComponent,
     AddStudyTermComponent,
     UpdateStudyTermComponent,
     AddGradeComponent,
     AnalysisComponent,
     WeightedGradeComponent,
     NavbarComponent,
-    PredictionComponent
+    PredictionComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +67,8 @@ import { PredictionComponent } from './analysis/prediction/prediction.component'
     MatNativeDateModule,
     MatListModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [
     AuthGuard,

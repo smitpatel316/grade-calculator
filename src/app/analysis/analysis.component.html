@@ -1,22 +1,19 @@
-<mat-grid-list cols="4" rowHeight="100px">
-  <mat-grid-tile [colspan]="3" [rowspan]="1">
-    <button
-      mat-stroked-button
-      color="primary"
-      style="height: 100%;width: 100%;"
-      [routerLink]="['/analysis/weighted-grade']"
-    >
-      <h2>Weighted Grade</h2>
-    </button>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]="1" [rowspan]="1">
-    <button
-      mat-stroked-button
-      color="primary"
-      style="height: 100%;width: 100%;"
-      [routerLink]="['/analysis/prediction']"
-    >
-      <h2>Future Prediction</h2>
-    </button>
-  </mat-grid-tile>
-</mat-grid-list>
+<h2 mat-dialog-title>Analysis</h2>
+<mat-dialog-content>
+  <button
+    mat-stroked-button
+    color="primary"
+    style="height: 100%;width: 100%;"
+    (click)="weightedGrade()"
+  >
+    <h2>Weighted Grade</h2>
+  </button>
+  <button
+    mat-stroked-button
+    color="primary"
+    style="height: 100%;width: 100%;"
+    (click)="prediction()"
+  >
+    <h2>Future Prediction</h2>
+  </button>
+</mat-dialog-content>
