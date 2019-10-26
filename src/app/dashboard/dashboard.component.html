@@ -37,10 +37,17 @@
           <mat-icon>delete</mat-icon>
         </button>
         &nbsp;
-        <button mat-mini-fab color="primary">
+        <button mat-mini-fab color="primary" (click)="analysis(termName)">
           <mat-icon>assessment</mat-icon>
         </button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
+<button
+  (click)="addTerm()"
+  mat-mini-fab
+  style="position: absolute; bottom: 20px; right: 20px;"
+>
+  <mat-icon>add</mat-icon>
+</button>

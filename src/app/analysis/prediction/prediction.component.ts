@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface Grade {
   name: string;
   grade: number;
@@ -11,7 +12,11 @@ export interface Grade {
   styleUrls: ['./prediction.component.css']
 })
 export class PredictionComponent implements OnInit {
-  constructor(private api: ApiService) {}
+  constructor(
+    private api: ApiService,
+    public dialogRef: MatDialogRef<PredictionComponent>,
+    @Inject(MAT_DIALOG_DATA) public passedOnInformation
+  ) {}
   allGrades: Grade[] = [];
   data: Grade[] = [];
   displayedColumns: string[] = ['name', 'grade', 'weight'];
@@ -27,6 +32,8 @@ export class PredictionComponent implements OnInit {
     this.api.getTerms().subscribe((data: any) => {
       this.terms = data;
       this.termNames = Object.keys(data);
+      this.selectedTerm = this.passedOnInformation.term;
+      this.loadCourses();
     });
   }
   loadCourses() {

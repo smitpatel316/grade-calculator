@@ -1,133 +1,111 @@
-<mat-card>
-  <mat-card-title>
-    Weighted Grade
-  </mat-card-title>
-  <mat-card-content>
-    <form>
-      <table>
-        <tr>
-          <td>
-            <mat-form-field>
-              <mat-label>Study Term</mat-label>
-              <mat-select
-                [(value)]="selectedTerm"
-                (selectionChange)="loadCourses()"
-              >
-                <mat-option
-                  *ngFor="let termName of termNames"
-                  [(value)]="termName"
-                >
-                  {{ termName }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-          <td *ngIf="selectedTerm !== ''">
-            <mat-form-field>
-              <mat-label>Course</mat-label>
-              <mat-select
-                [(value)]="selectedCourse"
-                (selectionChange)="loadGrades()"
-              >
-                <mat-option *ngFor="let course of courses" [(value)]="course">
-                  {{ course }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr *ngIf="selectedCourse !== ''">
-          <div class="mat-h3">
-            Grades
-          </div>
-        </tr>
-        <tr *ngIf="selectedCourse !== ''">
-          <td colspan="4">
-            <table
-              mat-table
-              [dataSource]="allGrades"
-              style="width: 100%"
-              class="mat-elevation-z8"
+<h2 mat-dialog-title>Calculate Weighted Grade</h2>
+<mat-dialog-content>
+  <form>
+    <table>
+      <tr>
+        <td *ngIf="selectedTerm !== ''">
+          <mat-form-field>
+            <mat-label>Course</mat-label>
+            <mat-select
+              [(value)]="selectedCourse"
+              (selectionChange)="loadGrades()"
             >
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>Name</th>
-                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-              </ng-container>
+              <mat-option *ngFor="let course of courses" [(value)]="course">
+                {{ course }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr *ngIf="selectedCourse !== ''">
+        <div class="mat-h3">
+          Grades
+        </div>
+      </tr>
+      <tr *ngIf="selectedCourse !== ''">
+        <td colspan="4">
+          <table
+            mat-table
+            [dataSource]="allGrades"
+            style="width: 100%"
+            class="mat-elevation-z8"
+          >
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            </ng-container>
 
-              <ng-container matColumnDef="grade">
-                <th mat-header-cell *matHeaderCellDef>Grade</th>
-                <td mat-cell *matCellDef="let element">{{ element.grade }}</td>
-              </ng-container>
+            <ng-container matColumnDef="grade">
+              <th mat-header-cell *matHeaderCellDef>Grade</th>
+              <td mat-cell *matCellDef="let element">{{ element.grade }}</td>
+            </ng-container>
 
-              <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef>Weight</th>
-                <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
-              </ng-container>
+            <ng-container matColumnDef="weight">
+              <th mat-header-cell *matHeaderCellDef>Weight</th>
+              <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+            </ng-container>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
-          </td>
-        </tr>
-        <tr *ngIf="weightedGrade !== null">
-          <td>
-            <mat-card style="float:left;">
-              <mat-card-header>
-                <mat-card-title>Percentage</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <h2>
-                  {{ weightedGrade }}
-                </h2>
-              </mat-card-content>
-            </mat-card>
-          </td>
-          <td>
-            <mat-card style="float:left;">
-              <mat-card-header>
-                <mat-card-title>University GPA</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <h2>
-                  {{ gpa[0] }}
-                </h2>
-              </mat-card-content>
-            </mat-card>
-          </td>
-          <td>
-            <mat-card style="float:left;">
-              <mat-card-header>
-                <mat-card-title>4.0 GPA</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <h2>
-                  {{ gpa[1] }}
-                </h2>
-              </mat-card-content>
-            </mat-card>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" class="content-center">
-            <button
-              mat-raised-button
-              color="accent"
-              style="margin: 5px;"
-              (click)="calculate()"
-            >
-              Calculate
-            </button>
-            <button
-              mat-raised-button
-              color="accent"
-              style="margin: 5px;"
-              (click)="clear()"
-            >
-              Clear
-            </button>
-          </td>
-        </tr>
-      </table>
-    </form>
-  </mat-card-content>
-</mat-card>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </td>
+      </tr>
+      <tr *ngIf="weightedGrade !== null">
+        <td>
+          <mat-card style="float:left;">
+            <mat-card-header>
+              <mat-card-title>Percentage</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h2>
+                {{ weightedGrade }}
+              </h2>
+            </mat-card-content>
+          </mat-card>
+        </td>
+        <td>
+          <mat-card style="float:left;">
+            <mat-card-header>
+              <mat-card-title>University GPA</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h2>
+                {{ gpa[0] }}
+              </h2>
+            </mat-card-content>
+          </mat-card>
+        </td>
+        <td>
+          <mat-card style="float:left;">
+            <mat-card-header>
+              <mat-card-title>4.0 GPA</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h2>
+                {{ gpa[1] }}
+              </h2>
+            </mat-card-content>
+          </mat-card>
+        </td>
+      </tr>
+    </table>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    mat-raised-button
+    color="accent"
+    style="margin: 5px;"
+    (click)="calculate()"
+  >
+    Calculate
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    style="margin: 5px;"
+    (click)="clear()"
+  >
+    Clear
+  </button>
+</mat-dialog-actions>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 import { UtilsService } from 'src/app/utils.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface Grade {
   name: string;
   grade: number;
@@ -12,7 +13,15 @@ export interface Grade {
   styleUrls: ['./weighted-grade.component.css']
 })
 export class WeightedGradeComponent implements OnInit {
-  constructor(private api: ApiService, private util: UtilsService) {}
+  constructor(
+    private api: ApiService,
+    private util: UtilsService,
+    public dialogRef: MatDialogRef<WeightedGradeComponent>,
+    @Inject(MAT_DIALOG_DATA) public passedOnInformation
+  ) {
+    this.ngOnInit();
+    this.data;
+  }
   allGrades: Grade[] = [];
   data: Grade[] = [];
   displayedColumns: string[] = ['name', 'grade', 'weight'];
@@ -27,13 +36,17 @@ export class WeightedGradeComponent implements OnInit {
     this.api.getTerms().subscribe((data: any) => {
       this.terms = data;
       this.termNames = Object.keys(data);
+      this.selectedTerm = this.passedOnInformation.term;
+      this.loadCourses();
     });
   }
   loadCourses() {
-    this.courses = Object.keys(this.terms[this.selectedTerm].courses);
-    this.selectedCourse = '';
-    this.weightedGrade = null;
-    this.gpa = null;
+    if (this.selectedTerm != null && this.terms != null) {
+      this.courses = Object.keys(this.terms[this.selectedTerm].courses);
+      this.selectedCourse = '';
+      this.weightedGrade = null;
+      this.gpa = null;
+    }
   }
   loadGrades() {
     this.data = this.terms[this.selectedTerm].courses[this.selectedCourse];

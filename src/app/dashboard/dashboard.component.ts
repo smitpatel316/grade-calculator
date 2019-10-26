@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddGradeComponent } from '../add-grade/add-grade.component';
 import { ApiService } from '../api.service';
 import { UpdateStudyTermComponent } from '../update-study-term/update-study-term.component';
+import { AddStudyTermComponent } from '../add-study-term/add-study-term.component';
+import { AnalysisComponent } from '../analysis/analysis.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,6 +42,17 @@ export class DashboardComponent implements OnInit {
     this.dialog.open(UpdateStudyTermComponent, {
       data: {
         term: termName
+      }
+    });
+  }
+  addTerm() {
+    this.dialog.open(AddStudyTermComponent);
+  }
+  analysis(termName: string) {
+    this.dialog.open(AnalysisComponent, {
+      data: {
+        term: termName,
+        dialog: this.dialog
       }
     });
   }
